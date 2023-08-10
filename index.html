@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ua">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мій Відео Портал</title>
+    <style>
+        body {
+            background-color: #ffd879ff;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        #version {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            font-size: 10px;
+        }
+        #videoUrlInput {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            margin: 10px;
+        }
+        button {
+            background-color: #FF8C00;
+            border: 2px solid black;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        iframe {
+            border: none;
+            width: 800px;
+            height: 450px;
+        }
+    </style>
+</head>
+<body>
+    <div id="version">Версія 1.0</div>
+    <input type="text" id="videoUrlInput" placeholder="Вставте посилання на відео з YouTube або сайт тут">
+    <button onclick="setVideoOrWebsite()">Вставити Відео або Сайт</button>
+    <div id="videoContainer"></div>
+
+    <script>
+        function setVideoOrWebsite() {
+            const urlInput = document.getElementById('videoUrlInput').value;
+            const container = document.getElementById('videoContainer');
+            container.innerHTML = ''; // Очистити попередній контент
+            
+            if (urlInput.includes('youtube.com')) {
+                const videoId = urlInput.split('v=')[1];
+                const iframe = document.createElement('iframe');
+                iframe.src = `https://www.youtube.com/embed/${videoId}`;
+                container.appendChild(iframe);
+            } else {
+                const iframe = document.createElement('iframe');
+                iframe.src = urlInput;
+                container.appendChild(iframe);
+            }
+        }
+    </script>
+</body>
+</html>
